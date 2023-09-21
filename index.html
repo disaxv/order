@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Beras</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Toko beras</h1>
+        <form>
+            <h2>Order :  <input type="number" id="order" placeholder="NO orderan" min="1" required></h2>
+            <h2>Order Date : <input type="date"></h2>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nama Produk</th>
+                    <th>Harga per kg</th>
+                    <th>jumlah (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>beras premium</td>
+                    <td>1200</td>
+                    <td><input type"number" id="beras-premium" value="0"></td>
+                </tr>
+                <tr>
+                    <td>beras medium</td>
+                    <td>1000</td>
+                    <td><input type"number" id="beras-medium" value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Total Belanja</h3>
+        <p class="total" id="total-belanja">rp 0</p>
+        <h3>diskon:</h3>
+        <p class="discount" id="diskon">rp 0</p>
+        <form id="checkout-form">
+            <button type="button" onclick="hitungTotal()">Hitung Total</button>
+            <button type="submit" onclick="cetakHalaman()">checkout</button>
+        </form>
+    </div>
+    <script>
+        function hitungTotal() {
+            const hargaBerasPremium = 12000;
+            const hargaBerasMedium = 10000;
+
+            const jumlahBerasPremium = parseInt(document.getElementById('beras-premium').value) || 0;
+            const jumlahBerasMedium = parseInt(document.getElementById('beras-medium').value) || 0;
+
+            const totalBelanja = (hargaBerasPremium * jumlahBerasPremium) + (hargaBerasMedium * jumlahBerasMedium);
+
+            let diskon = 0;
+            if (totalBelanja >= 5000){
+                diskon = totalBelanja * 0.1;
+            }
+
+            const totalSetelahDiskon = totalBelanja - diskon;
+
+            document.getElementById('total-belanja').textContent = 'RP' + totalSetelahDiskon;
+            document.getElementById('diskon').textContent = 'RP' + diskon;
+        }
+        const checkoutFrom = document.getElementById('checkout-form');
+            checkoutFrom.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('terimakasih telah berbelanja di toko kami. total belanjaan telah dihitung')
+        })
+        function cetakHalaman(){
+            window.print();
+        }
+    </script>
+</body>
+</html>
